@@ -1,5 +1,109 @@
 # BLC OBS Overlay Plugins
 
+Choose a language / 选择语言：
+
+<details>
+<summary><strong>English (EN)</strong></summary>
+
+## Overview
+
+A collection of local overlay plugins for [BLC (Bilibili Live Chat)](https://github.com/xfgryujk/blivechat) and OBS browser sources.
+
+| Plugin | Purpose | Admin page | OBS browser source |
+| --- | --- | --- | --- |
+| [Flag Wish Wall](flag-wish-wall/) | Collect wishes from chat with primary/secondary keywords, moderation, and continuous scrolling | `http://127.0.0.1:18453/admin` | `http://127.0.0.1:18453/overlay/wish-wall` |
+| [Song Quiz Scoreboard](song-quiz-scoreboard/) | Detect exact `+1` and `+2` chat messages during a game session and display a live scoreboard | `http://127.0.0.1:18454/admin` | `http://127.0.0.1:18454/overlay/song-score` |
+
+The plugins are independent and can run at the same time.
+
+> This is a community project. It is not an official project of BLC, bilibili, or OBS.
+
+## Requirements
+
+- Windows 10/11
+- BLC 1.10.3 (other versions have not been systematically tested)
+- OBS Studio with browser source support
+- Python 3.10 or later when running from source
+
+## Installation for users
+
+1. Prefer a packaged build from GitHub Releases. Do not use GitHub's Source code archive as a ready-to-run plugin. If no release is available, build from source as described below.
+2. Extract and copy the complete `flag-wish-wall` and/or `song-quiz-scoreboard` directory into BLC's `data/plugins` directory.
+3. Enable the plugin in BLC and fully restart BLC.
+4. Enable message forwarding in the BLC room settings (`通过服务器转发消息`).
+5. Open the corresponding admin page and run a local test.
+6. Add a Browser source in OBS and enter the OBS URL from the table above.
+
+Keep the exe, `_internal`, and page files in their original relative locations. If a port is already in use, update the plugin's `config.json` and the OBS URL together.
+
+## Run from source
+
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+python flag-wish-wall\main.py
+```
+
+Run the scoreboard in another terminal:
+
+```powershell
+.venv\Scripts\Activate.ps1
+python song-quiz-scoreboard\main.py
+```
+
+Direct source execution does not automatically receive the `BLC_PORT` and `BLC_TOKEN` environment variables injected by BLC. It is mainly intended for the admin UI and local tests. Let BLC start the plugins when receiving live chat.
+
+## Build Windows packages
+
+```powershell
+python -m pip install -r requirements-dev.txt
+pyinstaller --noconfirm --clean flag-wish-wall\flag-record-board.spec
+pyinstaller --noconfirm --clean song-quiz-scoreboard\self-score-board.spec
+```
+
+PyInstaller creates the runtime directory only. A release must also include each plugin's `admin.html`, `overlay.html`, `config.json`, `plugin.json`, and `README.md` beside the generated program directory.
+
+## Data and privacy
+
+- Both services bind to `127.0.0.1` by default and do not expose their admin pages directly to the LAN or internet.
+- The BLC connection token is read from process environment variables and is not stored in repository configuration.
+- Wish Wall entries are stored in `records.json`, which is excluded from Git.
+- Song Quiz scores are held in process memory and disappear when the process exits.
+- `plugin.log` may contain runtime error details. Review and redact it before attaching it to a public issue.
+
+## Troubleshooting
+
+- Admin page does not open: make sure the plugin is running and check whether port `18453` or `18454` is occupied.
+- OBS is blank: open the OBS URL in a normal browser first, then check whether the OBS browser source has cached an old page.
+- No live chat arrives: enable message forwarding in BLC room settings.
+- Local tests work but live chat does not: check the fan-medal threshold and the event diagnostic counters.
+- `WinError 10048`: another process is using the port. Stop the duplicate instance or change the port in `config.json`.
+
+See each plugin directory for its detailed rules.
+
+## Repository layout
+
+```text
+flag-wish-wall/          Wish Wall source, pages, configuration, and tests
+song-quiz-scoreboard/    Song Quiz source, pages, configuration, and tests
+requirements.txt        Runtime dependencies
+requirements-dev.txt    Build and test dependencies
+```
+
+Build output, logs, local BLC settings, user records, and release archives are excluded from version control.
+
+## License
+
+Licensed under the [MIT License](LICENSE). You may use, modify, distribute, and use the project commercially, provided that the original copyright and license notice are retained. The software is provided without warranty.
+
+</details>
+
+<details>
+<summary><strong>中文 (CN)</strong></summary>
+
+## 项目简介
+
 面向 [BLC（Bilibili Live Chat）](https://github.com/xfgryujk/blivechat) 与 OBS 浏览器源的本地直播插件集合。
 
 | 插件 | 功能 | 管理页 | OBS 浏览器源 |
@@ -90,3 +194,4 @@ requirements-dev.txt    构建与测试依赖
 
 本项目采用 [MIT License](LICENSE)。你可以使用、修改、分发和用于商业用途，但必须保留原始版权与许可证声明。软件按“原样”提供，不附带任何担保。
 
+</details>
