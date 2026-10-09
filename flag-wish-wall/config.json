@@ -1,0 +1,21 @@
+{
+  "host": "127.0.0.1",
+  "port": 18453,
+  "flag": "Flag",
+  "secondary_flags": [],
+  "secondary_auto_publish": false,
+  "blocked_words": "",
+  "max_chars": 0,
+  "max_records": 200,
+  "min_medal_level": 3,
+  "wall_title": "心愿墙",
+  "entry_separator": "★",
+  "layout_mode": "vertical",
+  "scroll_axis": "vertical",
+  "scroll_speed": 38,
+  "font_color": "#fff8e8",
+  "font_size": 36,
+  "stroke_enabled": true,
+  "stroke_color": "#261b2c",
+  "stroke_width": 1.0
+}

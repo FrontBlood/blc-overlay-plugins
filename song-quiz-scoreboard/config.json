@@ -1,0 +1,13 @@
+{
+  "host": "127.0.0.1",
+  "port": 18454,
+  "top_n": 10,
+  "min_medal_level": 0,
+  "board_title": "猜歌积分榜",
+  "font_size": 30,
+  "title_color": "#ffe98a",
+  "name_color": "#fff8ea",
+  "score_color": "#ffb7d5",
+  "panel_color": "#241b33",
+  "panel_opacity": 0.86
+}

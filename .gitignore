@@ -1,0 +1,24 @@
+# Python and PyInstaller output
+__pycache__/
+*.py[cod]
+build/
+dist/
+
+# Runtime files
+*.log
+*/records.json
+*/scores.json
+
+# Local BLC state and packaged releases
+/Plugins/
+/releases/
+/settings.xml
+/lastrun.txt
+/2026-07-14.txt
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
