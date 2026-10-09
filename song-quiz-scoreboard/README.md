@@ -1,73 +1,3 @@
-# Song Quiz Scoreboard
-
-Version: `0.3.3`
-
-Recognize exact `+1` and `+2` chat messages during a song-quiz session, manage the session through a local admin page, and display a live scoreboard in OBS.
-
-## Installation
-
-For normal users, download a release package and copy the complete `song-quiz-scoreboard` directory into BLC's `data/plugins` directory. Enable the plugin in BLC and fully restart BLC. Do not remove the `_internal` directory beside the executable.
-
-BLC room settings must enable `通过服务器转发消息` (forward messages through the server).
-
-## URLs
-
-- Admin page: `http://127.0.0.1:18454/admin`
-- OBS browser source: `http://127.0.0.1:18454/overlay/song-score`
-
-## Scoring rules
-
-- The plugin starts in an idle state and does not score messages.
-- Click **Start New Session** in the admin page to clear the previous results and start scoring.
-- After trimming leading and trailing whitespace, a message scores only when it is exactly `+1` or `+2`.
-- Messages such as `我也+1`, `+10`, and `+2加油` do not score.
-- Click **End Session** to stop scoring. OBS keeps the final scoreboard for the session.
-- Click **Start New Session** again to clear the previous scores and begin a new session.
-- Users with the same score are tied. OBS displays the top 10 by default.
-
-## Fan-medal validation
-
-- The default minimum fan-medal level is `0`, which disables validation.
-- When set to a positive value, only messages at or above the threshold are accepted.
-- If the event has no level field, it is treated as below the threshold.
-- The current version validates only the level value in the event; it does not verify that the fan medal belongs to the current livestream room.
-
-## Admin features
-
-- Start, end, and clear the current session.
-- Send local test messages for `+1`, `+2`, and different fan-medal levels.
-- Set a score directly, manually add or subtract one point, and delete a user.
-- Configure the title, number of displayed users, font size, title color, username color, score color, panel color, and transparency.
-- Inspect BLC events, received messages, successful scores, non-command messages, pre-session rejections, and fan-medal rejections.
-
-## Data and connection
-
-- Scores are held in process memory only; they do not persist across sessions or restarts.
-- Ending a session stops scoring but does not immediately clear the final scoreboard from OBS.
-- After a BLC WebSocket disconnect, the plugin retries every 5 seconds while the HTTP/OBS service continues running.
-- The OBS page restores the scoreboard, session, and display settings from snapshots.
-
-For weekly or monthly leaderboards, use a separate long-term data layer; this version does not provide one.
-
-## Troubleshooting
-
-- **No BLC events**: enable `通过服务器转发消息` in the BLC room settings.
-- **Messages do not score**: make sure a session is active and the message is exactly `+1` or `+2`.
-- **No one scores after enabling a level threshold**: check whether BLC events contain a fan-medal level.
-- **`WinError 10048`**: port `18454` is already in use. Stop the duplicate instance or edit `config.json`.
-
-## Run from source and test
-
-From the repository root:
-
-```powershell
-python song-quiz-scoreboard\main.py
-python song-quiz-scoreboard\tests\test_persistence.py
-```
-
-<details>
-<summary>中文附录</summary>
-
 # 听歌猜曲自觉积分榜
 
 当前版本：`0.3.3`
@@ -134,5 +64,3 @@ BLC 房间设置必须开启“通过服务器转发消息”。
 python song-quiz-scoreboard\main.py
 python song-quiz-scoreboard\tests\test_persistence.py
 ```
-
-</details>
