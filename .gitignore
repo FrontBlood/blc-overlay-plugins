@@ -3,11 +3,17 @@ __pycache__/
 *.py[cod]
 build/
 dist/
+_internal/
+*.exe
+*.zip
 
 # Runtime files
 *.log
 */records.json
 */scores.json
+.env
+.env.*
+!.env.example
 
 # Local BLC state and packaged releases
 /Plugins/

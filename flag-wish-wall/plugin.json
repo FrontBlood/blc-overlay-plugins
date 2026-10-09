@@ -1,7 +1,7 @@
 {
   "name": "Flag心愿墙",
   "version": "0.3.2",
-  "author": "Codex",
+  "author": "FrontBlood",
   "description": "支持大小写通用主激活词、多个副激活词入库审核或自动发布，并增强OBS断线自愈",
   "run": "flag-record-board.exe",
   "enabled": true

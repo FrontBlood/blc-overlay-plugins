@@ -1,7 +1,7 @@
 {
   "name": "听歌猜曲自觉积分榜",
   "version": "0.3.3",
-  "author": "Codex",
+  "author": "FrontBlood",
   "description": "增强OBS持久显示与BLC断线自愈，按活动场次识别观众的 +1 与 +2 弹幕并计分",
   "run": "self-score-board.exe",
   "enabled": true
